@@ -16,12 +16,15 @@ import Videos from "../components/Movie/videos";
 
 import { useNavigate } from 'react-router-dom';
 
+import { useTranslation } from 'react-i18next';
+
 
 
 
 const Movie = (prop) =>{
     const navigate = useNavigate();
     
+    const {t} = useTranslation();
 
     let params = useParams();
 
@@ -184,7 +187,7 @@ const Movie = (prop) =>{
                          </Box>
                      </Box>
      
-                 <span class="uye-puan">Üye Puanları</span>
+                 <span class="uye-puan">{t('movie_user_vote')}</span>
      
                 
                 {
@@ -198,7 +201,7 @@ const Movie = (prop) =>{
                  </div>
      
                  <h3 class="item">
-                     Özet
+                     {t('movie_summary')}
                  </h3>
                  <p class="aciklama">
                              {movie.overview}
@@ -227,8 +230,8 @@ const Movie = (prop) =>{
 
              <Videos videos={videos.results} setEmbedState={setEmbedState}/>
 
-             <MovieSlider data={similarData.results} title={`Benzer ${params.type == 'movie' ? 'Filmler' : 'TV Programları'}`} slider={{dots:false}}/>
-             <MovieSlider data={recommendations.results} title="Önerilenler" slider={{dots:false}}/>
+             <MovieSlider data={similarData.results} title={` ${params.type == 'movie' ? t('movie_smiliar') : t('tv_smiliar')}`} slider={{dots:false}}/>
+             <MovieSlider data={recommendations.results} title={t('movie_recommended')} slider={{dots:false}}/>
 
              </div>
             }

@@ -6,13 +6,13 @@ import MovieCard from "../components/MovieCard";
 import {PopulerUrl,UpComing as UpComingUrl,TrendUrl} from '../api'
 
 
-
+import { useTranslation } from 'react-i18next';
 
 const SelectNameToUrl = {
-    "Popüler":PopulerUrl,
-    "Gösterimdekiler":TrendUrl,
-    "Yakında":UpComingUrl,
-    "Popüler Tv Programları":()=>{
+    "popular":PopulerUrl,
+    "on_vision":TrendUrl,
+    "movie_soon":UpComingUrl,
+    "tv_series":()=>{
         return PopulerUrl(1,'tv');
     }
 }
@@ -33,6 +33,8 @@ const PaginationUI = (props) =>{
         setPage(value);
     };
 
+
+    const {t} = useTranslation();
     
 
 
@@ -78,7 +80,7 @@ const PaginationUI = (props) =>{
         <main>
           <Container  ref={containerRef}>
                  <Typography variant="h5" component="h5" my={2}>
-                      {props.name}
+                      {t(props.name)}
                   </Typography>
 
                   <CustomPagination />

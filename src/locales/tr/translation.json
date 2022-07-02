@@ -1,0 +1,22 @@
+{
+    "theme_dark_mode":"Gece Modu",
+    "theme_light_mode":"Gündüz Modu",
+    "menu_movies":"Filmler",
+    "popular":"Popüler",
+    "on_vision":"Gösterimdekiler",
+    "movie_soon":"Yakında",
+    "movie_trend":"Trend",
+    "movie_recommended":"Önerilenler",
+    "movie_smiliar":"Benzer Filmler",
+    "tv_smiliar":"Benzer Diziler",
+    "tv_series":"Popüler TV Programları",
+    "home_welcome":"Hoşgeldiniz",
+    "home_subtitle":"Milyonlarca film, TV şovu ve keşfedilecek kişi. Şimdi keşfedin.",
+    "home_text_field":"Film ara",
+    "home_button_field":"Ara",
+    "movie_summary":"Özet",
+  
+    "movie_trailer_button":"Fragmanı İzle",
+    "movie_user_vote":"Üye Puanları",
+    "input_language":"Dil"
+}

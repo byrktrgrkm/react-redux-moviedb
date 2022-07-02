@@ -1,5 +1,6 @@
 import {  createSlice } from '@reduxjs/toolkit';
 
+
 const initialState = {
   language:localStorage.getItem('language'),
   default: 'TR',
@@ -18,7 +19,6 @@ export const languageSlice = createSlice({
        if(!state.languages.includes(action.payload)) return;
 
        localStorage.setItem('language',action.payload)
-
       state.theme = action.payload;
     },
   },

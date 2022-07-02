@@ -4,6 +4,7 @@ import Movie from './views/Movie'
 import Search from './views/Search'
 import Pagination from './views/Pagination'
 
+
 export const routes = [
     {
         path:'/',
@@ -30,26 +31,26 @@ export const routes = [
     },
     {
         path:'/populer',
-        element:<Pagination name="Popüler" />,
+        element:<Pagination name="popular" />,
         exact:true,
         auth:false
     },
     {
         path:'/gosterimdekiler',
-        element:<Pagination name="Gösterimdekiler" />,
+        element:<Pagination name="on_vision" />,
         exact:true,
         auth:false
     },
     {
         path:'/yakinda',
-        element:<Pagination name="Yakında" />,
+        element:<Pagination name="movie_soon" />,
         exact:true,
         auth:false
     }
     ,
     {
         path:'/populer-tv',
-        element:<Pagination name="Popüler Tv Programları" />,
+        element:<Pagination name="tv_series" />,
         exact:true,
         auth:false
     }

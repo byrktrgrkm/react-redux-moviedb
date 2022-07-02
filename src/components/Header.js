@@ -32,6 +32,11 @@ import styled from '@emotion/styled';
 import { API } from '../api';
 
 
+import { useTranslation } from 'react-i18next';
+
+
+import i18next from "i18next";
+
   const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
     height: 34,
@@ -80,6 +85,10 @@ import { API } from '../api';
   }));
 
 const Header = () =>{
+
+    const { t } = useTranslation();
+
+    
     const [anchorElNav, setAnchorElNav] = useState(null);
 
   
@@ -116,6 +125,7 @@ const Header = () =>{
   };
 
   const onChangeLanguage = (_event,value) =>{
+    i18next.changeLanguage(value.props.value.toLowerCase());
     dispatch(switchLanguage(value.props.value))
   }
 
@@ -206,7 +216,7 @@ const Header = () =>{
                                 aria-expanded={open ? 'true' : undefined}
                                 onClick={handleClick}
                             >
-                            Fimler
+                            {t('menu_movies')} 
                         </Button>
 
                         <Button
@@ -226,22 +236,22 @@ const Header = () =>{
                         >
                         <MenuItem onClick={handleClose}>
                                 <NavLink  style={{color:'inherit',textDecoration:'none'}}  to={`/populer`}>
-                                    Popüler
+                                { t('popular') }
                                 </NavLink>
                             </MenuItem>
                             <MenuItem   onClick={handleClose}>
                                 <NavLink style={{color:'inherit',textDecoration:'none'}}   to={`/gosterimdekiler`}>
-                                    Gösterimdekiler
+                                { t('on_vision') }
                                 </NavLink>
                             </MenuItem>
                             <MenuItem  onClick={handleClose}>
                                 <NavLink style={{color:'inherit',textDecoration:'none'}}   to={`/yakinda`}>
-                                    Yakında
+                                { t('movie_soon') }
                                 </NavLink>
                             </MenuItem>
                             <MenuItem  onClick={handleClose}>
                                 <NavLink style={{color:'inherit',textDecoration:'none'}}   to={`/populer-tv`}>
-                                    Popüler TV Dizileri
+                                { t('tv_series') }
                                 </NavLink>
                             </MenuItem>
 
@@ -259,17 +269,19 @@ const Header = () =>{
                 <FormControlLabel
                         control={<MaterialUISwitch sx={{ m: 1 }} checked={theme == 'dark'}
                         onChange={handleChange} defaultChecked  />}
-                        label={theme == 'dark' ? 'Gece Modu' : 'Gündüz Modu'}
+                        label={theme == 'dark' ? t('theme_dark_mode') : t('theme_light_mode')}
                     />
 
                
-                <FormControl>
+                <FormControl variant="filled" sx={{ m: 1, minWidth: 80 }} >
+                  <InputLabel id="demo-simple-select-label">{t('input_language')}</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        label="Age"
+                        label={t('language')}
                         defaultValue={language}
                         onChange={onChangeLanguage} 
+
                     >
                         {
                             languages.map(lan =><MenuItem value={lan}>{lan}</MenuItem> )

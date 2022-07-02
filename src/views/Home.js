@@ -1,10 +1,13 @@
 import Search from '.././components/Home/Search'
 import MovieSlider from '../components/MovieSlider'
 
-import {PopulerUrl,UpComing as UpComingUrl,TrendUrl,API} from '../api'
+import {PopulerUrl,UpComing as UpComingUrl,TrendUrl} from '../api'
 
 
 import { useState,useEffect } from 'react';
+
+import { useTranslation } from 'react-i18next';
+
 
 const Home = () =>{
 
@@ -43,6 +46,7 @@ const Home = () =>{
     },[])
 
 
+    const { t } = useTranslation();
 
 
 
@@ -50,11 +54,11 @@ const Home = () =>{
         <main>
 
             <Search />
-            <MovieSlider data={populerData.results} title="Popüler Olanlar" to="/populer"  slider={{slidesToShow:5,dots:false}}/>
+            <MovieSlider data={populerData.results} title={t('popular')} to="/populer"  slider={{slidesToShow:5,dots:false}}/>
 
-            <MovieSlider data={populerDiziData.results} title="Popüler TV Dizileri"  to="/populer-tv"  slider={{slidesToShow:5,dots:false}}/>
-            <MovieSlider data={yakindaData.results} title="Yakında" to="/yakinda"  slider={{dots:false}}/>
-            <MovieSlider data={trendData.results} title="Trend" to="/gosterimdekiler"  slider={{dots:false}}/>
+            <MovieSlider data={populerDiziData.results} title={t("tv_series")}  to="/populer-tv"  slider={{slidesToShow:5,dots:false}}/>
+            <MovieSlider data={yakindaData.results} title={t("movie_soon")} to="/yakinda"  slider={{dots:false}}/>
+            <MovieSlider data={trendData.results} title={t("movie_trend")} to="/gosterimdekiler"  slider={{dots:false}}/>
         </main>
     );
 }

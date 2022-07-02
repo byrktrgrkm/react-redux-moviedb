@@ -17,17 +17,24 @@ import {routes} from './routes'
 import { ThemeProvider ,createTheme} from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
-import { Provider,useSelector } from 'react-redux';
-import { store } from './app/store';
+import { useSelector } from 'react-redux';
+
 
 import {
     selectTheme
   } from './features/theme/ThemeSlice'
 
+import i18next from './i18nextConf';
+import { selectLanguage } from './features/language/LanguageSlice';
+
+
+
 function App() {
   //const [mode] = React.useState('light');
   const mode = useSelector(selectTheme);
-  console.log(mode)
+
+  const lang = useSelector(selectLanguage);
+  i18next.changeLanguage(lang.toLowerCase());
 
   const theme = React.useMemo(
     () =>
@@ -41,7 +48,7 @@ function App() {
 
 
   return (
-    <Provider store={store}>
+  
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <BrowserRouter>
@@ -61,7 +68,6 @@ function App() {
       <Footer />
       </BrowserRouter>
     </ThemeProvider>
-    </Provider>
   );
 }
 

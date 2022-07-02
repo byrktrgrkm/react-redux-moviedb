@@ -1,0 +1,21 @@
+{
+    "theme_dark_mode":"Dark Mode",
+    "theme_light_mode":"Light Mode",
+    "menu_movies":"Movies",
+    "popular":"Popular",
+    "on_vision":"On Vision",
+    "movie_soon":"Soon",
+    "movie_trend":"Trend",
+    "movie_recommended":"Recommended",
+    "movie_smiliar":"Smiliar Movies",
+    "tv_smiliar":"Smiliar Series",
+    "tv_series":"Popular TV Series",
+    "home_welcome":"Welcome.",
+    "home_subtitle":"Millions of movies, TV shows and people to discover. Explore now.",
+    "home_text_field":"Search for a movie, tv show, person......",
+    "home_button_field":"Search",
+    "movie_summary":"Summary",
+    "movie_trailer_button":"Watch Trailer",
+    "movie_user_vote":"User Votes",
+    "input_language":"Language"
+}

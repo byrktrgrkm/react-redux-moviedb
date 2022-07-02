@@ -13,7 +13,7 @@ import InputBase from '@mui/material/InputBase';
 
 import { useNavigate } from 'react-router-dom';
 
-
+import { useTranslation } from 'react-i18next';
 
 const ImagePropeties = {
     backgroundImage:`url('https://www.themoviedb.org/t/p/w1920_and_h600_multi_faces_filter(duotone,032541,01b4e4)/5GISMqlRXMEyBrgEqyvhaMMuQmJ.jpg')`,
@@ -73,6 +73,7 @@ const SearchField = styled('div')(({ theme }) => ({
 
 
 const Search = () =>{
+  const { t } = useTranslation();
     const navigate = useNavigate();
     const Handle = (e) =>{
         if(e.charCode == 13){
@@ -86,14 +87,14 @@ const Search = () =>{
             <Container style={ImagePropeties} >
                 <Box sx={{ bgcolor: '',height:'300px' ,display:'flex',justifyContent:'center',flexDirection:'column'}}  >
              
-                <h1 class="hosgeldin">Hoş Geldiniz.</h1>
-                <h2 class="hosgeldin">Milyonlarca film, TV şovu ve keşfedilecek kişi. Şimdi keşfedin.</h2> 
+                <h1 class="hosgeldin">{t('home_welcome')}</h1>
+                <h2 class="hosgeldin">{t('home_subtitle')}</h2> 
                 <SearchField>
                     <SearchIconWrapper>
                     <SearchIcon />
                     </SearchIconWrapper>
                     <StyledInputBase
-                    placeholder="Film ara"
+                    placeholder={t('home_text_field')}
                     inputProps={{ 'aria-label': 'search' }}
                     onKeyPress={Handle}
                     />
