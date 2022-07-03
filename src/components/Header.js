@@ -15,7 +15,8 @@ import { useState}  from 'react';
 
 import { NavLink } from 'react-router-dom';
 import { FormControl, FormControlLabel, InputLabel, Select, Switch } from '@mui/material';
-
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -34,6 +35,7 @@ import { API } from '../api';
 
 import { useTranslation } from 'react-i18next';
 
+import LeftMenu from './LeftMenu';
 
 import i18next from "i18next";
 
@@ -90,15 +92,15 @@ const Header = () =>{
 
     
     const [anchorElNav, setAnchorElNav] = useState(null);
-
+    const [leftMenu,setLeftMenu] = useState(false)
   
     const handleOpenNavMenu = (event) => {
-      setAnchorElNav(event.currentTarget);
+  
+      setLeftMenu(true)
     };
 
   
     const handleCloseNavMenu = () => {
-      setAnchorElNav(null);
     };
 
     const [anchorEl, setAnchorEl] = useState(null);
@@ -129,7 +131,14 @@ const Header = () =>{
     dispatch(switchLanguage(value.props.value))
   }
 
+
+
+  const leftMenuHandle = (open) =>{
+    setLeftMenu(open)
+  }
+
     return (
+
         <header>
             <AppBar position="static">
                 <Container >
@@ -204,6 +213,7 @@ const Header = () =>{
                     >
                         LOGO
                     </Typography>
+                    
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         
 
@@ -220,9 +230,25 @@ const Header = () =>{
                         </Button>
 
                         <Button
-                                sx={{ my: 2, color: 'white', display: 'block' }}
+                                sx={{ my: 2, color: 'white', display: 'flex' }}
+        
+                                startIcon={<BookmarkBorderIcon/>}
+                            > 
+                           <NavLink  style={{color:'inherit',textDecoration:'none'}}  to={`/yer-imleri`}>
+                                { t('menu_bookmark') }
+                          </NavLink>
+                        </Button>
+
+
+                        <Button
+                            startIcon={  <GitHubIcon />}
+                                sx={{ my: 2, color: 'white', display: 'flex' }}
                             >
-                            Github
+                              <a  style={{color:'inherit',textDecoration:'none'}}  target="_blank" href={`https://github.com/byrktrgrkm/react-redux-moviedb`}>
+                              Github
+                          </a>
+                           
+                          
                         </Button>
                         <Menu
                             
@@ -258,12 +284,14 @@ const Header = () =>{
                             
 
                         </Menu>
+                       
 
                     </Box>
 
+                 
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                  
-                </Typography>
+                              
+                    </Typography>
                 
 
                 <FormControlLabel
@@ -284,7 +312,7 @@ const Header = () =>{
 
                     >
                         {
-                            languages.map(lan =><MenuItem value={lan}>{lan}</MenuItem> )
+                            languages.map(lan =><MenuItem value={lan}>{lan.toUpperCase()}</MenuItem> )
                         }
                         
                     </Select>
@@ -293,7 +321,8 @@ const Header = () =>{
                 </Toolbar>
                 </Container>
                 </AppBar>
-              
+           
+            <LeftMenu open={leftMenu} setOpen={leftMenuHandle}/>     
         </header>
     );
 }

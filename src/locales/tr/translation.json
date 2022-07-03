@@ -2,6 +2,7 @@
     "theme_dark_mode":"Gece Modu",
     "theme_light_mode":"Gündüz Modu",
     "menu_movies":"Filmler",
+    "menu_bookmark":"Yer İmleri",
     "popular":"Popüler",
     "on_vision":"Gösterimdekiler",
     "movie_soon":"Yakında",
@@ -18,5 +19,13 @@
   
     "movie_trailer_button":"Fragmanı İzle",
     "movie_user_vote":"Üye Puanları",
-    "input_language":"Dil"
+    "input_language":"Dil",
+    "bookmark_button_remove":"Sil",
+    "bookmark_delete_message":"Başarılı Şekilde Silindi",
+    "bookmark_button_add":"Yer İmleri Ekle",
+    "bookmark_button_delete":"Yer İmleri Kaldır",
+    "bookmark_alert_not_found":"Yer imleri bulunamadı.",
+    "bookmark_select_perpage":"Her Sayfada",
+    "footer_theme_language":"Tema Dili",
+    "footer_theme_mode":"Tema Modu"
 }

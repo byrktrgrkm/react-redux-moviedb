@@ -1,4 +1,4 @@
-import {  Box, CardMedia, Chip, CircularProgress, Divider, Grid, Icon, Typography } from "@mui/material";
+import {  Box, Button, CardMedia, Chip, CircularProgress, Divider, Grid, Icon, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import { useParams } from "react-router-dom";
 import { loadCSS } from 'fg-loadcss';
@@ -19,9 +19,17 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 
+import BookmarkAddRoundedIcon from '@mui/icons-material/BookmarkAddRounded';
+import BookmarkAddedRoundedIcon from '@mui/icons-material/BookmarkAddedRounded';
 
+import { useSelector, useDispatch } from 'react-redux';
+import {
+    addBookmark,deleteBookmark,containsBookmark,selectBookmarks,bookmarkContains
+  } from '../features/BookmarkSlice'
 
 const Movie = (prop) =>{
+
+
     const navigate = useNavigate();
     
     const {t} = useTranslation();
@@ -40,17 +48,57 @@ const Movie = (prop) =>{
     const [similarData,setSimilarData] = useState({});
     const [recommendations,setRecommendations] = useState({});
 
- 
-    
+
+    const dispatch = useDispatch();
+
+    const [isBookmarked,setIsBookmarked] = useState(false)
+
 
     const [embedState,setEmbedState] = useState({
         show:false,
         key:''
     });
 
+    const result = useSelector(selectBookmarks);
+    const bookmarkHandle = (data,movie_type,action)=>{
+       
+        const actions = {
+            delete: () =>{
+                dispatch(deleteBookmark(data.id))
+                
+            },
+            insert: () =>{
+                const p = {
+                    id:data.id,
+                    poster_path:data.poster_path,
+                    original_title:data.original_title,
+                    release_date:data.release_date,
+                    media_type:movie_type,
+                    vote_average:data.vote_average
+                }
+        
+                dispatch(addBookmark(p))
+            }
+        }
+
+        actions[action] && actions[action]();
+    }
+
+
+    useEffect(()=>{
+        setIsBookmarked(bookmarkContains(result,params.movie_id))
+    },[result,params])
+
+
+   
+
+  
+
 
     useEffect( () =>{
-        
+
+
+    window.scrollTo({top:0,behavior: 'smooth'})
 
      fetch(MovieUrl(params.movie_id,params.type))
     .then(async (response) => ( {status:response.status,data: await response.json()} ))
@@ -69,6 +117,8 @@ const Movie = (prop) =>{
 
         setMovie(response.data)
 
+      
+
 
     }).catch(message =>{
         console.error(message)
@@ -80,7 +130,9 @@ const Movie = (prop) =>{
 
     fetch(SimilarUrl(params.movie_id,params.type))
     .then(async (response) => ( {status:response.status,data: await response.json()} ))
-    .then(response => { setSimilarData(response.data)})
+    .then(response => { 
+        response.data.results = response.data.results.map(i =>{ i.media_type = 'tv';return i})
+        setSimilarData(response.data)})
    
     fetch(RecommendationUrl(params.movie_id,params.type))
     .then(async (response) => ( {status:response.status,data: await response.json()} ))
@@ -123,10 +175,21 @@ const Movie = (prop) =>{
                movie.result != false 
                && 
                <div>
-               <div class="movie-background" style={{'backgroundImage':`url('${ImageUrl_Original(movie.backdrop_path)}')`}}>
+               <div class="movie-background" style={{position:'relative','backgroundImage':`url('${ImageUrl_Original(movie.backdrop_path)}')`}}>
+                <div class="background-color" 
+                    style={
+                        {position:'absolute',
+                        left:0,right:0,top:0,bottom:0,
+                        'background-image':'linear-gradient(to left,black, darkblue)',
+                        'z-index':-10,opacity:'.3'
+                        }
+                    }>
+
+                </div>
                 <Container>
+           
                 <Embed params={embedState}  setEmbedState={setEmbedState}/>
-                <Grid container spacing={2}>
+                <Grid container spacing={2}  >
                  <Grid item xs={12} md={4}   sx={{padding:'40px',position:'relative'}}>
                      <div>
      
@@ -139,10 +202,17 @@ const Movie = (prop) =>{
                          alt="Paella dish"
                        
                      />
-                     <div onClick={handleVideo} class="fragmani-izle">Fragmanı İzle</div>
+                      {
+                    videos != null 
+                    && 
+                    videos.results != null
+                    && videos.results.length > 0 && 
+                    <div onClick={handleVideo} class="fragmani-izle">{t('movie_trailer_button')}</div>
+                }   
+                     
                      </div>
                  </Grid>
-                 <Grid item xs={12} md={8} sx={{marginTop:'20px'}}>
+                 <Grid item xs={12} md={8} sx={{marginTop:'20px'}} style={{zIndex:1}}>
                      
                  <Typography variant="h4" component="h1" sx={{fontWeight:600,color:'white'}} >
                      {movie.title || movie.original_name}
@@ -195,7 +265,7 @@ const Movie = (prop) =>{
                     && 
                     videos.results != null
                     && videos.results.length > 0 && 
-                 <Chip onClick={handleVideo} sx={{padding:'8px',marginLeft:'30px'}} icon={<Icon class="fas fa-play"   color="danger" />} label="Fragmanı İzle" color="primary" />
+                 <Chip onClick={handleVideo} sx={{padding:'8px',marginLeft:'30px'}} icon={<Icon class="fas fa-play"   color="danger" />} label={t('movie_trailer_button')} color="primary" />
                 
                 }   
                  </div>
@@ -206,19 +276,27 @@ const Movie = (prop) =>{
                  <p class="aciklama">
                              {movie.overview}
                  </p>
-     
-                 <Grid container spacing={2}>
-                     <Grid item xs={6} md={4}>
-                         <div class="">
-                             Destin Daniel Cretton
-     
-                         </div>
-                         <small class="text.secondary" >
-                         Director, Screenplay
-                         </small>
-                         
-                    </Grid> 
-                 </Grid>
+                 {
+                    isBookmarked ? 
+                    <Button
+                    onClick={() => {
+                        bookmarkHandle(movie,params.type,'delete')
+                    }}
+                    startIcon={ <BookmarkAddedRoundedIcon />}
+                    variant="outlined"  color="error">{t('bookmark_button_delete')}</Button>
+                    
+                    :<Button
+                    onClick={() => {
+                        bookmarkHandle(movie,params.type,'insert')
+                    }}
+                    startIcon={ <BookmarkAddRoundedIcon />}
+                    variant="outlined"  color="primary">{t('bookmark_button_add')}</Button>
+
+
+                 }
+                 
+         
+                
                  </Grid>
                  </Grid>
                 </Container>

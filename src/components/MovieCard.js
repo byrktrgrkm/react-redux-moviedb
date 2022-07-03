@@ -7,13 +7,14 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Tooltip from '@mui/material/Tooltip';
 import {ImageUrl_500} from '../api'
 import { Link } from 'react-router-dom';
-import { Grow } from '@mui/material';
+import { Button, Grow } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
-
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const MovieCard = (prop) =>{
    
-
+    const {t} = useTranslation()
 
     return (
         <Grow
@@ -59,6 +60,16 @@ const MovieCard = (prop) =>{
         <Typography variant="body2" color="text.secondary">
         {prop.release_date || prop.first_air_date}
         </Typography>
+        
+        {
+            prop.delete &&
+
+            <Button
+            startIcon={<DeleteIcon />}
+            onClick={prop.delete.handle}
+            variant="outlined"  color="error" sx={{float:'right'}}>{t('bookmark_button_remove')}</Button>
+        }
+        
     </CardContent>
     </Card>
 

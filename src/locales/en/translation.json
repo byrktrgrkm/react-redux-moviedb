@@ -2,6 +2,8 @@
     "theme_dark_mode":"Dark Mode",
     "theme_light_mode":"Light Mode",
     "menu_movies":"Movies",
+    "menu_bookmark":"Bookmarks",
+    
     "popular":"Popular",
     "on_vision":"On Vision",
     "movie_soon":"Soon",
@@ -17,5 +19,13 @@
     "movie_summary":"Summary",
     "movie_trailer_button":"Watch Trailer",
     "movie_user_vote":"User Votes",
-    "input_language":"Language"
+    "input_language":"Language",
+    "bookmark_button_remove":"Delete",
+    "bookmark_delete_message":"Deleted Successfully",
+    "bookmark_button_add":"Bookmark Add",
+    "bookmark_button_delete":"Bookmark Remove",
+    "bookmark_alert_not_found":"Bookmarks not found",
+    "bookmark_select_perpage":"Per Page",
+    "footer_theme_language":"Theme Language",
+    "footer_theme_mode":"Theme Mode"
 }

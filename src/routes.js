@@ -3,7 +3,7 @@ import Movies from './views/Movies'
 import Movie from './views/Movie'
 import Search from './views/Search'
 import Pagination from './views/Pagination'
-
+import Bookmark from './views/Bookmark'
 
 export const routes = [
     {
@@ -51,6 +51,11 @@ export const routes = [
     {
         path:'/populer-tv',
         element:<Pagination name="tv_series" />,
+        exact:true,
+        auth:false
+    },{
+        path:'/yer-imleri',
+        element:<Bookmark/>,
         exact:true,
         auth:false
     }

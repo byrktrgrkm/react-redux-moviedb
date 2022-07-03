@@ -1,10 +1,22 @@
 import {  createSlice } from '@reduxjs/toolkit';
 
 
+import translationEN from "../../locales/en/translation.json"
+import translationTR from "../../locales/tr/translation.json"
+
 const initialState = {
   language:localStorage.getItem('language'),
-  default: 'TR',
-  languages:["TR","EN"]
+  default: 'tr',
+  languages:["tr","en"]
+};
+
+export const resources = {
+  en: {
+    translation: translationEN
+  },
+  tr: {
+    translation: translationTR
+  }
 };
 
 if(!initialState.language || !initialState.languages.includes(initialState.language) ) 
@@ -29,6 +41,8 @@ export const { switchLanguage } = languageSlice.actions;
 export const selectLanguage = (state) => state.language.language;
 
 export const languages = initialState.languages;
+
+export const initial = initialState;
 
 
 export default languageSlice.reducer;

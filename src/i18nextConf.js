@@ -3,21 +3,10 @@ import { initReactI18next } from 'react-i18next';
 import Backend from 'i18next-xhr-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-import translationEN from "./locales/en/translation.json"
-import translationTR from "./locales/tr/translation.json"
+import {resources,initial} from './features/language/LanguageSlice.js'
 
-
-const fallbackLng = ['tr'];
-const availableLanguages = ['tr', 'en'];
-const resources = {
-  en: {
-    translation: translationEN
-  },
-  tr: {
-    translation: translationTR
-  }
-};
-
+const fallbackLng = [initial.default]
+const availableLanguages = initial.languages
 
 i18n
   .use(Backend) // load translations using http (default public/assets/locals/en/translations)

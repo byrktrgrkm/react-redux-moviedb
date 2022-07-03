@@ -1,12 +1,13 @@
-import { Grid, Pagination, Typography,Container } from "@mui/material";
+import { Grid, Pagination, Typography,Container, Stack } from "@mui/material";
 
-import React from "react";
+import React, { memo } from "react";
 import MovieCard from "../components/MovieCard";
 
 import {PopulerUrl,UpComing as UpComingUrl,TrendUrl} from '../api'
 
 
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from "react-router-dom";
 
 const SelectNameToUrl = {
     "popular":PopulerUrl,
@@ -19,9 +20,12 @@ const SelectNameToUrl = {
 
 const PaginationUI = (props) =>{
 
+    const navigate = useNavigate();
 
     if( ! SelectNameToUrl[props.name]){
         // redirect 
+        console.error(`${props.name} not available`)
+        navigate('/');
     }
 
 
@@ -69,9 +73,11 @@ const PaginationUI = (props) =>{
 
     const CustomPagination = () => {
         return (
+            <Stack spacing={2}>
             <div style={{margin:'10px',textAlign:'center',display:'flex',justifyContent:'center'}}>
                  <Pagination count={ Math.min(data.total_pages || 1,500)  }   variant="outlined" color="secondary"   page={page} onChange={handleChange} />
             </div>
+            </Stack>
         )
     }
 
@@ -90,7 +96,7 @@ const PaginationUI = (props) =>{
                     {
                         data && data.results && 
                         data.results.map(data =>(
-                            <Grid item xs={2} md={3} key={data.id} >
+                            <Grid item xs={6} md={3} key={data.id} >
                                 <MovieCard {...data} />
                             </Grid>
                              
@@ -108,4 +114,4 @@ const PaginationUI = (props) =>{
     )
 }
 
-export default PaginationUI;
+export default memo(PaginationUI);
