@@ -19,7 +19,7 @@ const ImagePropeties = {
     backgroundImage:`url('https://www.themoviedb.org/t/p/w1920_and_h600_multi_faces_filter(duotone,032541,01b4e4)/5GISMqlRXMEyBrgEqyvhaMMuQmJ.jpg')`,
     backgroundSize:'contain',
     backgroundRepeat:'no-repeat',
-    backgroundSize:'100%',
+    backgroundSize:'100% 100%',
      
 }
 
@@ -61,12 +61,6 @@ const SearchField = styled('div')(({ theme }) => ({
       paddingLeft: `calc(1em + ${theme.spacing(4)})`,
       transition: theme.transitions.create('width'),
       width: '100%',
-      [theme.breakpoints.up('sm')]: {
-        width: '12ch',
-        '&:focus': {
-          width: '20ch',
-        },
-      },
     },
   }));
   
@@ -88,7 +82,7 @@ const Search = () =>{
                 <Box sx={{ bgcolor: '',height:'300px' ,display:'flex',justifyContent:'center',flexDirection:'column'}}  >
              
                 <h1 class="hosgeldin">{t('home_welcome')}</h1>
-                <h2 class="hosgeldin">{t('home_subtitle')}</h2> 
+                <h2 class="hosgeldin-2">{t('home_subtitle')}</h2> 
                 <SearchField>
                     <SearchIconWrapper>
                     <SearchIcon />

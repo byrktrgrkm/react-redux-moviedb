@@ -1,4 +1,4 @@
-import { Alert, Avatar, Button, Container, Grid, Input } from "@mui/material";
+import { Alert, Avatar, Button, Container, FormControl, Grid, IconButton, Input, InputAdornment, InputLabel, OutlinedInput, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import {
     Link,
@@ -8,7 +8,8 @@ import {
 
 import {SearchUrl,ImageUrl_500} from '../api'
 import MovieCard from "../components/MovieCard";
-
+import SearchIcon from '@mui/icons-material/Search';
+import { useTranslation } from "react-i18next";
 
 function useQuery() {
     const { search } = useLocation();
@@ -30,6 +31,9 @@ const Search = () =>{
     const [value,setValue] = useState(query.get('q'));
     const [data,setData] = useState([]);
 
+
+    const {t} = useTranslation();
+
     const handle = (e) => {
  
         setValue(e.target.value)
@@ -45,6 +49,8 @@ const Search = () =>{
     }
 
 
+
+
     useEffect(() =>{
         
 
@@ -57,11 +63,31 @@ const Search = () =>{
     return (
         <>
 
-        <Container sx={{marginTop:'10px'}}>
-            <Input placeholder="Film ara.." variant="outlined"  type="search" sx={{width:'100%'}} value={value} onChange={handle} onKeyDown={handleSubmit}/>
-            <Button variant="outlined" sx={{float:'right',position:'fixed'}}>Ara</Button>
+         <Container container  style={{marginTop:'20px',marginBottom:'20px',textAlign:'center'}}>
+            <FormControl sx={{width:'80%'}} variant="outlined">
+            <InputLabel htmlFor="outlined-adornment-password">{t('home_text_field')}</InputLabel>
+            <OutlinedInput
+                id="outlined-adornment-password"
+                type="search"
+                value={value} 
+                onChange={handle} 
+                onKeyDown={handleSubmit}
+                endAdornment={
+                <InputAdornment position="end">
+                    <IconButton
+                    aria-label="search"
+                    edge="end"
+                    >
+                        <SearchIcon />
+                    </IconButton>
+                </InputAdornment>
+                }
+                label="Password"
+            />
+            </FormControl>
         </Container>
-
+        
+       
         <Container style={{minHeight:'80vh'}}>
 
         {
@@ -79,7 +105,7 @@ const Search = () =>{
                 data.map(item => (
                                     
                    
-                    <Grid item xs={2} md={3} key={item.id} >
+                    <Grid item xs={6} md={3} key={item.id} >
                                 <MovieCard {...item} />
                     </Grid>
                     

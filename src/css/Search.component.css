@@ -1,5 +1,11 @@
-.hosgeldin{
+.hosgeldin,.hosgeldin-2{
     color:white;
     font-weight: bold;
     line-height: 0;
+}
+.hosgeldin-2{
+    color:white;
+    font-weight: bold;
+    line-height: inherit;
+    margin:0
 }

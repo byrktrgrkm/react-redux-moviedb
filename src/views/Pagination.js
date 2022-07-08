@@ -13,8 +13,8 @@ const SelectNameToUrl = {
     "popular":PopulerUrl,
     "on_vision":TrendUrl,
     "movie_soon":UpComingUrl,
-    "tv_series":()=>{
-        return PopulerUrl(1,'tv');
+    "tv_series":(page)=>{
+        return PopulerUrl(page,'tv');
     }
 }
 

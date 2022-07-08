@@ -14,7 +14,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { useState}  from 'react';
 
 import { NavLink } from 'react-router-dom';
-import { FormControl, FormControlLabel, InputLabel, Select, Switch } from '@mui/material';
+import { FormControl, FormControlLabel, Hidden, InputLabel, Select, Switch } from '@mui/material';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
@@ -194,26 +194,27 @@ const Header = () =>{
                       
                         </Menu>
                     </Box>
-                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-                    <Typography
-                        variant="h5"
-                        noWrap
-                        component="a"
-                        href=""
-                        sx={{
-                        mr: 2,
-                        display: { xs: 'flex', md: 'none' },
-                        flexGrow: 1,
-                        fontFamily: 'monospace',
-                        fontWeight: 700,
-                        letterSpacing: '.3rem',
-                        color: 'inherit',
-                        textDecoration: 'none',
-                        }}
-                    >
-                        LOGO
-                    </Typography>
-                    
+                    <NavLink  style={{color:'inherit',textDecoration:'none',display:'flex'}}  to={`/`}>
+                      <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                      <Typography
+                          variant="h5"
+                          noWrap
+                          component="a"
+                          href=""
+                          sx={{
+                          mr: 2,
+                          display: { xs: 'flex', md: 'none' },
+                          flexGrow: 1,
+                          fontFamily: 'monospace',
+                          fontWeight: 700,
+                          letterSpacing: '.3rem',
+                          color: 'inherit',
+                          textDecoration: 'none',
+                          }}
+                      >
+                          LOGO
+                      </Typography>
+                    </NavLink>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         
 
@@ -297,7 +298,7 @@ const Header = () =>{
                 <FormControlLabel
                         control={<MaterialUISwitch sx={{ m: 1 }} checked={theme == 'dark'}
                         onChange={handleChange} defaultChecked  />}
-                        label={theme == 'dark' ? t('theme_dark_mode') : t('theme_light_mode')}
+                        label={ <Hidden mdDown>{theme == 'dark' ? t('theme_dark_mode') : t('theme_light_mode')}</Hidden>}
                     />
 
                
